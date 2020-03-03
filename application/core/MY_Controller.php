@@ -6,7 +6,6 @@ class MY_Controller extends CI_Controller{
         parent::__construct();
 
         $this->load->helper(array('url'));
-        $this->load->library('component');
         // $this->load->library('encrypt');
 
         define('SITE',site_url());
