@@ -17,7 +17,7 @@ class MY_Controller extends CI_Controller{
         define('ERROR_INVALID_MODE','Error mode is invalid!!');
     }
     
-    protected function render($template = '', $page_name = '', $content = null, $data = null, $assets_js = null){
+    protected function render($template = '', $page_name = '', $content = null, $data = null){
         switch($template){
             case 'normal_page':
                 $this->load->view('template/head');
@@ -26,16 +26,20 @@ class MY_Controller extends CI_Controller{
                 $this->load->view('template/header', $date_header);
                 
                 $this->load->view($content, $data);
+                $script_file = explode('/', $content);
+                $script_file = $script_file[0];
+                // $view["assets_js"] = !is_null($assets_js) ? $this->js_asset($assets_js) : '';
 
-                $view["assets_js"] = !is_null($assets_js) ? $this->js_asset($assets_js) : '';
-
+                $this->load->view('template/footer');
+                $this->load->view($content.'_js');
                 $this->load->view('template/foot');
+                
                 break;
             case 'blank_page':
                 
                 $this->load->view($content, $data);
 
-                $view["assets_js"] = !is_null($assets_js) ? $this->js_asset($assets_js) : '';
+                // $view["assets_js"] = !is_null($assets_js) ? $this->js_asset($assets_js) : '';
                 break;
         }
     }
